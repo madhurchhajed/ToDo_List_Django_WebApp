@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Current</title>
+</head>
+
+{% extends 'todo/base.html' %}
+{% block content %}
+
+<body>
+<h1 style="text-align:center;">Completed ToDo's </h1>
+
+<!--<ul>-->
+<!--{% for todo in todos %}-->
+<!--<li>-->
+<!--<a href="{% url 'view_todo' todo.id %}">-->
+<!--{% if todo.important %} <b> {% endif %} {{todo.title}} {% if todo.important %} </b>{% endif %}-->
+<!--{% if todo.memo %} -: {{todo.summary}}{% endif %}-->
+<!--<br>-->
+<!--{{ todo.completed_todo|date:'M j Y H:i' }}-->
+<!--</a>-->
+<!--</li>-->
+
+<!--{% endfor %}-->
+
+<!--</ul>-->
+
+{% if todos %}
+<ul class="list-group">
+    {%for todo in todos%}
+    <li class="list-group-item">
+
+        <!--<div class="d-flex w-100 justify-content-between">-->
+        <a href="{% url 'view_todo' todo.id %}" class="list-group-item list-group-item-primary">
+            {% if todo.important %} <b> {% endif %} {{todo.title}}
+            <br>
+            <small>
+                {{ todo.completed_date|date:'M j Y H:i' }}
+            </small>
+
+            {% if todo.important %} </b>{% endif %}
+        </a>
+
+        <!--</div>-->
+        <!--<small class="list-group-item list-group-item-success"> {{ todo.completed_date|date:'M j Y H:i' }}</small>-->
+        {% if todo.memo %}
+        <pre class="list-group-item list-group-item-info"> {{todo.summary}}  </pre>
+        {% endif %}
+
+    </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<br>
+<h5 style="text-align:center;">No completed ToDo's available </h5>
+{% endif %}
+
+{% endblock %}
+</body>
+</html>
+
