@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Todo Item </title>
+</head>
+
+{% extends 'todo/base.html' %}
+{% block content %}
+
+<br>
+<br>
+
+<body>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+<br>
+<form method="POST" action="{% url 'complete_todo' todo.id %}">
+    {% csrf_token %}
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-success">Completed</button>
+    </div>
+</form>
+<br>
+<form method="POST" action="{% url 'delete_todo' todo.id %}">
+    {% csrf_token %}
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+</form>
+
+{% endblock %}
+
+</body>
+</html>
+
